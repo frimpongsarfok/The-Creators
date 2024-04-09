@@ -3,3 +3,4 @@ __pycache__/
 *.db
 .git-backup/
 venv/
+.DS_Store
