@@ -16,8 +16,10 @@ const Reciept = (props) => {
       }).then((res) => {
         if (res.ok) {
           res.json().then((data) => {
-            setReceipt(data)
+           
             console.log(data)
+            setReceipt(data)
+           
           })
         }
       })
