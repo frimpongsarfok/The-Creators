@@ -77,34 +77,7 @@ def create_user():
     )
     db.session.update(new_user)
     db.session.commit()
-    return jsonify({'message': 'User created successfully'}), 201
-
-
-@app.route('/login', methods=['POST'])
-def login():
-    # Extract email and password from the request
-    data = request.json
-    email = data.get('email')
-    password = data.get('password')
-
-    if not email or not password:
-        return jsonify({'message': 'Email and password are required'}), 400
-
-    # Query the user by email
-    user = User.query.filter_by(email=email).first()
-
-    # If user not found or password does not match
-    if user is None or not User.query.filter_by(password= password).first():
-        return jsonify({'message': 'Invalid email or password'}), 401
-
-    # Successful login
-    return jsonify({
-        'id': user.id,
-        'full_name': user.full_name,
-        'email': user.email,
-        # Sensitive information like password should not be returned
-    }), 200
-    
+    return jsonify({'message': 'User created successfully'}), 201    
     
     
     
@@ -235,5 +208,41 @@ def cancel():
     return jsonify({'message': 'Rerservation canceled successfully'}), 200
 
 # Run the Flask application
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    if not data or 'email' not in data or 'password' not in data or 'name' not in data:
+        return jsonify({'message': 'Fill out the information'}), 400
+
+    # Check if user already exists
+    user = User.query.filter_by(email=data['email']).first()
+    if not user:
+       new_user = User(
+        password=data['password'],
+        name=data['name'],
+        email=data['email'],
+        card_number=00000000000,
+        expiration_date='01/01/2099',
+        cvc=000)    
+       db.session.add(new_user)
+    else:
+        user.password = data['password']
+        db.session.add(new_user)
+  
+    db.session.commit()
+    return jsonify({'message': 'User created successfully'}), 201
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    if not data or 'email' not in data or 'password' not in data:
+        return jsonify({'message': 'Fill out the information'}), 400
+    else:
+        user = User.query.filter_by(email=data['email']).first()
+        if user and user.password == data['password']:
+            return jsonify({'message': 'Login successful'}), 200
+        else:
+            return jsonify({'message': 'Invalid email or password'}), 401
+                        
 if __name__ == '__main__':
     app.run(debug=True,port=5001)
