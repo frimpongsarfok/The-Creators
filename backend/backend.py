@@ -212,7 +212,7 @@ def cancel():
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
-    if not data or 'email' not in data or 'password' not in data or 'full_name' not in data:
+    if not data or 'email' not in data or 'password' not in data :
         return jsonify({'message': 'Fill out the information'}), 400
 
     # Check if user already exists
@@ -221,7 +221,7 @@ def register():
     if not user:
        new_user = User(
         password=hash_password,
-        full_name=data['full_name'],
+        full_name=data['email'].split('@')[0],
         email=data['email'],
         card_number=00000000000,
         expiration_date='01/01/2099',
