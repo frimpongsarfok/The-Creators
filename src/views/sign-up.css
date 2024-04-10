@@ -1,7 +1,7 @@
 .sign-up-container {
   width: 100%;
-  display: flex;
-  overflow: auto;
+  height: auto;
+  background-repeat: no-repeat;
   min-height: 100vh;
   align-items: center;
   flex-direction: column;
@@ -153,31 +153,29 @@
   justify-content: center;
 }
 .sign-up-banner1 {
-  width: 100%;
-  height: 952px;
-  padding-top: 125px;
-  padding-left: var(--dl-space-space-oneandhalfunits);
-  padding-right: 0px;
+  display: flex;
+  flex: 1;
   flex-direction: row;
-  padding-bottom: 84px;
-  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
 }
 .sign-up-group5 {
-  width: 404px;
+  width: 30%;
   height: 638px;
-  display: flex;
   position: relative;
-  align-items: flex-start;
-  flex-shrink: 1;
+  flex-direction: row;
+  align-content: center;
+  align-self: center;
+  justify-content: center;
+  margin-left: 5%;
+
+
+
 }
 .sign-up-frame51 {
   gap: 10px;
-  top: 0px;
-  left: 0px;
-  height: 52.52830123901367px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
+  height: auto;
+  width:90% ;
   flex-shrink: 0;
 }
 .sign-up-text {
@@ -193,20 +191,16 @@
   text-decoration: none;
 }
 .sign-up-frame54 {
-  top: 110.52830505371094px;
-  left: -5.6843418860808015e-14px;
-  width: 404px;
-  height: 58px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 0;
+  width: 90%;
+  height: auto;
+  margin-top: 20px;
+  align-items: center;
   flex-direction: column;
 }
 .sign-up-frame52 {
   gap: 10px;
-  display: flex;
-  align-items: flex-start;
+  width: 90%;
+ 
 }
 .sign-up-name-input {
   color: rgba(0, 0, 0, 1);
@@ -221,15 +215,11 @@
   text-decoration: none;
 }
 .sign-up-frame55 {
-  top: 188.22640991210938px;
-  left: -5.6843418860808015e-14px;
-  width: 404px;
-  height: 58px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 0;
+  width: 90%;
+  height: auto;
+  margin-top: 20px;
   flex-direction: column;
+  
 }
 .sign-up-frame521 {
   gap: 10px;
@@ -249,14 +239,9 @@
   text-decoration: none;
 }
 .sign-up-frame551 {
-  top: 265.9245300292969px;
-  left: -5.6843418860808015e-14px;
-  width: 404px;
-  height: 58px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 0;
+  width: 90%;
+  height: auto;
+  margin-top: 20px;
   flex-direction: column;
 }
 .sign-up-frame522 {
@@ -311,48 +296,35 @@
   text-decoration: none;
 }
 .sign-up-group1 {
-  top: 210px;
-  left: 1px;
-  width: 395px;
-  height: 83px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 1;
+ width: 100%;
+ height: 20%;
 }
 .sign-up-email {
-  width: 396px;
-  height: 29px;
+  width: 90%;
+  height: 50px;
+  padding: 25px;
 }
 .sign-up-group11 {
-  top: 287px;
-  left: 1px;
-  width: 396px;
-  height: 83px;
+
   display: flex;
-  position: absolute;
+
   align-items: flex-start;
   flex-shrink: 1;
 }
 .sign-up-password {
-  width: 396px;
-  height: 29px;
+  width:90%;
+  height: 50px;
+  padding: 25px;
 }
 .sign-up-sign-up-button {
-  top: 562px;
-  left: 25px;
-  width: 441px;
-  height: 83px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 1;
-  flex-direction: column;
-  justify-content: flex-start;
+  width: 90%;
+  
+  justify-content: center;
 }
 .sign-up-signup {
   color: rgb(255, 252, 252);
-  width: 401px;
+  width: 90%;
+  margin-top:50px;
   font-size: 13px;
   font-style: normal;
   font-family: "Poppins";
@@ -361,13 +333,7 @@
   text-transform: capitalize;
   background-color: rgb(58, 91, 34);
 }
-.sign-up-container1 {
-  width: 246px;
-  height: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
+
 .sign-up-frame57 {
   gap: 10px;
   width: 147px;
@@ -382,14 +348,13 @@
   margin-right: var(--dl-space-space-sixunits);
 }
 .sign-up-container2 {
-  width: 1920px;
-  border: 2px dashed rgba(120, 120, 120, 0.4);
-  height: 1675px;
+  width: 60%;
+  height: 90%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   background-size: cover;
-  background-image: url("/eaaf8151-89e3-401a-84bc-f53ab5ddd004-2000w.jpg");
+  
 }
 .sign-up-text06 {
   top: -153px;
@@ -446,18 +411,16 @@
   color: #000000;
 }
 .sign-up-group12 {
-  top: 314px;
-  left: 25px;
-  width: 396px;
-  height: 83px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 1;
+  width: auto;
+  height: auto;
+  align-items: center;
+
 }
 .sign-up-username {
-  width: 396px;
-  height: 29px;
+  width: 90%;
+  height: 50px;
+  padding: 25px;
+  align-self: center;
 }
 .sign-up-sign-in-page-link {
   top: 646px;
@@ -562,11 +525,21 @@
   .sign-up-nav52 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .sign-up-banner1 {
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
+  .banner1sign-up- {
+    
+    flex-direction: column;
+    position: absolute;
+  }
+  .sign-up-group5{
+    width: 100%;
+    position: relative;
+  }
+  .sign-up-container2{
+    width: 100%;
+    position: relative;
   }
   .sign-up-footer {
+    position: relative;
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
@@ -586,17 +559,19 @@
   }
 }
 @media(max-width: 479px) {
+  .sign-up-group5 {
+    width: 100%;
+
+
+  }
   .sign-up-navbar-interactive {
     padding: var(--dl-space-space-unit);
   }
   .sign-up-mobile-menu1 {
     padding: 16px;
   }
-  .sign-up-banner1 {
-    padding-top: var(--dl-space-space-twounits);
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-    padding-bottom: var(--dl-space-space-twounits);
+  .sign-up-container2{
+    width: 100%;
   }
   .sign-up-footer {
     padding: var(--dl-space-space-unit);

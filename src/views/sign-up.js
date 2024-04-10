@@ -30,7 +30,7 @@ const SignUp = (props) => {
               </Link>
               <Link to="/cart" className="sign-up-cart-link bodySmall">
                 Cart
-                {cookies.cart&& <div style={{width:10,height:10,borderRadius:5,marginLeft:10,background:"red"}}></div>}
+                {cookies.cart && <div style={{ width: 10, height: 10, borderRadius: 5, marginLeft: 10, background: "red" }}></div>}
               </Link>
             </nav>
             <div className="sign-up-buttons">
@@ -49,6 +49,7 @@ const SignUp = (props) => {
             data-thq="thq-mobile-menu"
             className="sign-up-mobile-menu1 mobileMenu"
           >
+
             <div className="sign-up-nav">
               <div className="sign-up-top">
                 <span className="logo">MOTELLY</span>
@@ -68,6 +69,7 @@ const SignUp = (props) => {
                 <span className="sign-up-nav42 bodySmall">Sign Up</span>
                 <span className="sign-up-nav52 bodySmall">Cart</span>
               </nav>
+
               <div className="sign-up-buttons1">
                 <button className="buttonFlat">Login</button>
                 <button className="buttonFilled">Register</button>
@@ -96,72 +98,110 @@ const SignUp = (props) => {
           </div>
         </header>
       </div>
-      <div className="sign-up-hero"></div>
       <div className="sign-up-banner">
-        <div className="sign-up-banner1 bannerContainer">
+        <div className="sign-up-banner1">
+
           <div className="sign-up-group5">
-            <div className="sign-up-frame51">
-              <span className="sign-up-text">
-                <span>Get Started Now</span>
-              </span>
-            </div>
-            <div className="sign-up-frame54">
-              <div className="sign-up-frame52">
-                <span className="sign-up-name-input">
-                  <span>Name</span>
+            <form>
+              <div className="sign-up-frame51">
+                <span className="sign-up-text">
+                  <span>Get Started Now</span>
                 </span>
               </div>
-            </div>
-            <div className="sign-up-frame55">
-              <div className="sign-up-frame521">
-                <span className="sign-up-email-input">
-                  <span>Email address</span>
-                </span>
-              </div>
-            </div>
-            <div className="sign-up-frame551">
-              <div className="sign-up-frame522">
-                <span className="sign-up-password-input">
-                  <span>Password</span>
-                </span>
-              </div>
-            </div>
-            <div className="sign-up-frame59">
-              <div className="sign-up-group4">
-                <span className="sign-up-text05">
-                  Have an account?
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: ' ',
-                    }}
+              <div className="sign-up-frame54">
+                <div className="sign-up-frame52">
+                  <span className="sign-up-name-input">
+                    <span>Email address</span>
+                  </span>
+                </div>
+                <div className="sign-up-group12">
+                  <input id="email1"
+                    type="text"
+                    placeholder="enter email address"
+                    className="sign-up-username input"
                   />
-                </span>
+                </div>
+
               </div>
-            </div>
-            <div className="sign-up-group1">
-              <input
-                type="text"
-                placeholder="placeholder"
-                className="sign-up-email input"
-              />
-            </div>
-            <div className="sign-up-group11">
-              <input
-                type="text"
-                placeholder="placeholder"
-                className="sign-up-password input"
-              />
-            </div>
+              <div className="sign-up-frame55">
+                <div className="sign-up-frame521">
+                  <span className="sign-up-email-input">
+                    <span>Confirm email address</span>
+                  </span>
+                </div>
+                <div className="sign-up-group1">
+                  <input id="email2"
+                    type="text"
+                    placeholder="repeat email address"
+                    className="sign-up-email input"
+                  />
+                </div>
+              </div>
+              <div className="sign-up-frame551">
+                <div className="sign-up-frame522">
+                  <span className="sign-up-password-input">
+                    <span>Password</span>
+                  </span>
+                </div>
+                <div className="sign-up-group11">
+                  <input id="password1"
+                    type="text"
+                    placeholder="enter password"
+                    className="sign-up-password input"
+                  />
+                </div>
+              </div>
+              <div className="sign-up-sign-up-button">
+                <button type="button" className="sign-up-signup button" onClick={() => {
+                  form = document.querySelector('form')
+                  form.addEventListener('submit', (e) => {
+                    e.preventDefault()
+                  })
+                  data = new FormData(form)
+                  if(data.get('email1') !== data.get('email2')) {
+                    alert('Emails do not match')
+                    return
+                  }else if(data.get('password1').length < 8) {
+                    alert('Password must be at least 8 characters')
+                    return
+                  }else{
+                    fetch('http://localhost:5001/register', {
+                      method: 'POST',
+                      body: {
+                        email: data.get('email1'),
+                        password: data.get('password1')
+                      }
+                    })
+                      .then((res) => res.json())
+                      .then((json) => {
+                        alert(json.message)
+                      })
+                  }
+      
+                }}>
+                  Signup
+                </button>
+              </div>
+              <div className="sign-up-frame59">
+                <div className="sign-up-group4">
+                  <span className="sign-up-text05">
+                    Have an account?
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: ' ',
+                      }}
+                    />
+                  </span>
+                </div>
+              </div>
+
+            </form>
           </div>
-          <div className="sign-up-sign-up-button">
-            <button type="button" className="sign-up-signup button">
-              Signup
-            </button>
+
+
+          <div className="sign-up-container2">
+            <img src='/eaaf8151-89e3-401a-84bc-f53ab5ddd004-2000w.jpg' style={{ width: "100%", height: "100%" }}></img>
           </div>
-          <div className="sign-up-container1">
-            <div className="sign-up-frame57"></div>
-          </div>
-          <div className="sign-up-container2"></div>
           <span className="sign-up-text06">
             <span className="sign-up-text07">
               Have an account?
@@ -195,13 +235,8 @@ const SignUp = (props) => {
             </span>
             <span>Sign In</span>
           </span>
-          <div className="sign-up-group12">
-            <input
-              type="text"
-              placeholder="placeholder"
-              className="sign-up-username input"
-            />
-          </div>
+
+
           <div className="sign-up-sign-in-page-link">
             <Link to="/sign-up-page1" className="sign-up-link-to-sign-in-page">
               <span className="sign-up-text15">Sign In</span>
