@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import check_password_hash
 from flask_cors import CORS
-
+from hmac import compare_digest
+import bcrypt
 import uuid
 
 app = Flask(__name__)
@@ -211,15 +212,16 @@ def cancel():
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
-    if not data or 'email' not in data or 'password' not in data or 'name' not in data:
+    if not data or 'email' not in data or 'password' not in data or 'full_name' not in data:
         return jsonify({'message': 'Fill out the information'}), 400
 
     # Check if user already exists
     user = User.query.filter_by(email=data['email']).first()
+    hash_password = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
     if not user:
        new_user = User(
-        password=data['password'],
-        name=data['name'],
+        password=hash_password,
+        full_name=data['full_name'],
         email=data['email'],
         card_number=00000000000,
         expiration_date='01/01/2099',
@@ -239,7 +241,7 @@ def login():
         return jsonify({'message': 'Fill out the information'}), 400
     else:
         user = User.query.filter_by(email=data['email']).first()
-        if user and user.password == data['password']:
+        if bcrypt.checkpw(data['password'].encode('utf-8'), user.password):
             return jsonify({'message': 'Login successful'}), 200
         else:
             return jsonify({'message': 'Invalid email or password'}), 401
