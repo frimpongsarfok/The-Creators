@@ -5,9 +5,9 @@ import { Helmet } from 'react-helmet'
 
 import Question14 from '../components/question14'
 import './rooms.css'
-import {useCookies} from 'react-cookie'
+import { useCookies } from 'react-cookie'
 const Rooms = (props) => {
-  const [rooms, setRooms] = React.useState({"diamond": 0, "gold": 0, "silver": 0, "copper": 0})
+  const [rooms, setRooms] = React.useState({ "diamond": 0, "gold": 0, "silver": 0, "copper": 0 })
   const [cookies, setCookies, removeCookies] = useCookies(['cart'])
   React.useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +16,7 @@ const Rooms = (props) => {
         // No need to set Content-Type for GET requests, and Access-Control-Allow-Origin is handled by the server.
       })
         .then(response => response.json())
-        .then(data => setRooms({"diamond":data[0].available_rooms,"gold":data[1].available_rooms,"silver":data[2].available_rooms, "copper":data[3].available_rooms}))
+        .then(data => setRooms({ "diamond": data[0].available_rooms, "gold": data[1].available_rooms, "silver": data[2].available_rooms, "copper": data[3].available_rooms }))
         .catch((error) => console.error('Error:', error));
     }
     fetchData()
@@ -41,7 +41,7 @@ const Rooms = (props) => {
               </Link>
               <Link to="/cart" className="rooms-cart-link bodySmall">
                 Cart
-                {cookies.cart&& <div style={{width:10,height:10,borderRadius:5,marginLeft:10,background:"red"}}></div>}
+                {cookies.cart && <div style={{ width: 10, height: 10, borderRadius: 5, marginLeft: 10, background: "red" }}></div>}
               </Link>
             </nav>
             <div className="rooms-buttons">
@@ -193,7 +193,7 @@ const Rooms = (props) => {
             <div className="rooms-container02">
               <div className="rooms-container03">
                 <span className="rooms-room-1-price">----</span>
-      
+
               </div>
               <h1 className="rooms-room-1-title">The Oceanfront Retreat</h1>
               <span className="rooms-room-1-description">
@@ -216,8 +216,11 @@ const Rooms = (props) => {
                   type="button"
                   className="rooms-book-r1 button"
                   onClick={async () => {
-                    
-                    setCookies('cart', 1,{path: '/'})
+                    if (rooms.diamond > 0) {
+                      setCookies('cart', 1, { path: '/' })
+                    } else {
+                      alert("No rooms available")
+                    }
                   }
 
                   }
@@ -262,13 +265,16 @@ const Rooms = (props) => {
                   <span className="rooms-text18">Gold Tier : {rooms.gold}</span>
                 </div>
                 <button type="button" className="button" onClick={async () => {
-                    
 
-                 
-                    setCookies('cart', 2,{path: '/'})
+
+                  if (rooms.gold > 0) {
+                    setCookies('cart', 2, { path: '/' })
+                  } else {
+                    alert("No rooms available")
                   }
+                }
 
-                  }>
+                }>
                   Book
                 </button>
               </div>
@@ -304,13 +310,16 @@ const Rooms = (props) => {
                 <span className="rooms-text19">Silver Tier : {rooms.silver}</span>
               </div>
               <button type="button" className="button" onClick={async () => {
-                    
 
-                 
-                    setCookies('cart', 3,{path: '/'})
-                  }
 
-                  }>
+                if (rooms.silver > 0) {
+                  setCookies('cart', 3, { path: '/' })
+                } else {
+                  alert("No rooms available")
+                }
+              }
+
+              }>
                 <span>
                   <span>Book</span>
                   <br></br>
@@ -350,10 +359,13 @@ const Rooms = (props) => {
                 <span className="rooms-text23">Copper Tier : {rooms.copper}</span>
               </div>
               <button type="button" className="button" onClick={async () => {
-                    setCookies('cart', 4,{path: '/'})
-                  }
-
-                  }>
+                if (rooms.copper > 0) {
+                  setCookies('cart', 4, { path: '/' })
+                } else {
+                  alert("No rooms available")
+                }
+              }
+              }>
                 <span>
                   <span>Book</span>
                   <br></br>

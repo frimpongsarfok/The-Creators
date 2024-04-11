@@ -212,7 +212,7 @@ def cancel():
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
-    if not data or 'email' not in data or 'password' not in data or 'full_name' not in data:
+    if not data or 'email' not in data or 'password' not in data :
         return jsonify({'message': 'Fill out the information'}), 400
 
     # Check if user already exists
@@ -221,7 +221,7 @@ def register():
     if not user:
        new_user = User(
         password=hash_password,
-        full_name=data['full_name'],
+        full_name=data['email'].split('@')[0],
         email=data['email'],
         card_number=00000000000,
         expiration_date='01/01/2099',
@@ -229,7 +229,7 @@ def register():
        db.session.add(new_user)
     else:
         user.password = data['password']
-        db.session.add(new_user)
+        db.session.add(user)
   
     db.session.commit()
     return jsonify({'message': 'User created successfully'}), 201
@@ -241,10 +241,11 @@ def login():
         return jsonify({'message': 'Fill out the information'}), 400
     else:
         user = User.query.filter_by(email=data['email']).first()
-        if bcrypt.checkpw(data['password'].encode('utf-8'), user.password):
-            return jsonify({'message': 'Login successful'}), 200
+        if not user:
+            return jsonify({'message': 'Invalid email'}), 401
+        elif not bcrypt.checkpw(data['password'].encode('utf-8'), user.password):
+            return jsonify({'message': 'Invalid password'}), 401
         else:
-            return jsonify({'message': 'Invalid email or password'}), 401
-                        
+            return jsonify({'message': 'Login successful'}), 200
 if __name__ == '__main__':
     app.run(debug=True,port=5001)
