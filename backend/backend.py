@@ -229,7 +229,7 @@ def register():
        db.session.add(new_user)
     else:
         user.password = data['password']
-        db.session.add(new_user)
+        db.session.add(user)
   
     db.session.commit()
     return jsonify({'message': 'User created successfully'}), 201
@@ -241,10 +241,11 @@ def login():
         return jsonify({'message': 'Fill out the information'}), 400
     else:
         user = User.query.filter_by(email=data['email']).first()
-        if bcrypt.checkpw(data['password'].encode('utf-8'), user.password):
-            return jsonify({'message': 'Login successful'}), 200
+        if not user:
+            return jsonify({'message': 'Invalid email'}), 401
+        elif not bcrypt.checkpw(data['password'].encode('utf-8'), user.password):
+            return jsonify({'message': 'Invalid password'}), 401
         else:
-            return jsonify({'message': 'Invalid email or password'}), 401
-                        
+            return jsonify({'message': 'Login successful'}), 200
 if __name__ == '__main__':
     app.run(debug=True,port=5001)

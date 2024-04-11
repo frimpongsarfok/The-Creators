@@ -36,14 +36,21 @@ const Cart = (props) => {
                 Rooms
               </Link>
             </nav>
-            <div className="cart-buttons">
-              <Link to="/sign-up-page1" className="cart-login buttonFlat">
+            {cookies.user === undefined && <div className="home-buttons">
+              <Link to="/sign-up-page1" className="home-login buttonFlat">
                 Login
               </Link>
-              <Link to="/sign-up" className="cart-register buttonFilled">
+              <Link to="/sign-up" className="home-register buttonFilled">
                 Register
               </Link>
+            </div>}
+            {cookies.user !== undefined && <div className="home-buttons">
+              <button  className="home-login buttonFlat" value={"Logout"} onClick={()=>{
+                removeCookies('user')
+                props.history.push('/')
+              }}>Logout</button>
             </div>
+            }
           </div>
           <div data-thq="thq-burger-menu" className="cart-burger-menu">
             <svg viewBox="0 0 1024 1024" className="cart-icon socialIcons">

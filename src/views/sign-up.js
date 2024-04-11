@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie'
 import './sign-up.css'
 
 const SignUp = (props) => {
-  const [cookies, setCookies, removeCookies] = useCookies(['cart'])
+  const [cookies, setCookies, removeCookies] = useCookies(['cart', 'user'])
   return (
     <div className="sign-up-container">
       <Helmet>
@@ -34,10 +34,21 @@ const SignUp = (props) => {
               </Link>
             </nav>
             <div className="sign-up-buttons">
-              <button className="sign-up-login buttonFlat">Login</button>
-              <button className="sign-up-register buttonFilled">
+            {cookies.user === undefined && <div className="home-buttons">
+              <Link to="/sign-up-page1" className="home-login buttonFlat">
+                Login
+              </Link>
+              <Link to="/sign-up" className="home-register buttonFilled">
                 Register
-              </button>
+              </Link>
+            </div>}
+            {cookies.user !== undefined && <div className="home-buttons">
+              <button  className="home-login buttonFlat" value={"Logout"} onClick={()=>{
+                removeCookies('user')
+                props.history.push('/')
+              }}>Logout</button>
+            </div>
+            }
             </div>
           </div>
           <div data-thq="thq-burger-menu" className="sign-up-burger-menu">
@@ -69,11 +80,6 @@ const SignUp = (props) => {
                 <span className="sign-up-nav42 bodySmall">Sign Up</span>
                 <span className="sign-up-nav52 bodySmall">Cart</span>
               </nav>
-
-              <div className="sign-up-buttons1">
-                <button className="buttonFlat">Login</button>
-                <button className="buttonFilled">Register</button>
-              </div>
             </div>
             <div>
               <svg
@@ -102,7 +108,7 @@ const SignUp = (props) => {
         <div className="sign-up-banner1">
 
           <div className="sign-up-group5">
-            <form>
+            <form id='form'>
               <div className="sign-up-frame51">
                 <span className="sign-up-text">
                   <span>Get Started Now</span>
@@ -115,8 +121,8 @@ const SignUp = (props) => {
                   </span>
                 </div>
                 <div className="sign-up-group12">
-                  <input id="email1"
-                    type="text"
+                  <input name="email1"
+                    type="email"
                     placeholder="enter email address"
                     className="sign-up-username input"
                   />
@@ -130,8 +136,8 @@ const SignUp = (props) => {
                   </span>
                 </div>
                 <div className="sign-up-group1">
-                  <input id="email2"
-                    type="text"
+                  <input name="email2"
+                    type="email"
                     placeholder="repeat email address"
                     className="sign-up-email input"
                   />
@@ -144,8 +150,8 @@ const SignUp = (props) => {
                   </span>
                 </div>
                 <div className="sign-up-group11">
-                  <input id="password1"
-                    type="text"
+                  <input name="password1"
+                    type="password"
                     placeholder="enter password"
                     className="sign-up-password input"
                   />
@@ -153,98 +159,71 @@ const SignUp = (props) => {
               </div>
               <div className="sign-up-sign-up-button">
                 <button type="button" className="sign-up-signup button" onClick={() => {
-                  form = document.querySelector('form')
+                  const form = document.getElementById('form')
                   form.addEventListener('submit', (e) => {
                     e.preventDefault()
                   })
-                  data = new FormData(form)
-                  if(data.get('email1') !== data.get('email2')) {
+                  const data = new FormData(form)
+                  if (data.get('email1') !== data.get('email2')) {
                     alert('Emails do not match')
                     return
-                  }else if(data.get('password1').length < 8) {
+                  } else if (data.get('password1').length < 8) {
                     alert('Password must be at least 8 characters')
                     return
-                  }else{
+                  } else {
                     fetch('http://localhost:5001/register', {
                       method: 'POST',
-                      body: {
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body:JSON.stringify ({
                         email: data.get('email1'),
                         password: data.get('password1')
+                      })
+                    }).then((res) => {
+                      if(res.ok) {
+                        setCookies('user', {email:data.get('email1'),password:data.get('password1')}, { path: '/' })
                       }
+                      return res.json()
                     })
-                      .then((res) => res.json())
                       .then((json) => {
                         alert(json.message)
                       })
                   }
-      
-                }}>
+
+                }
+                }>
                   Signup
                 </button>
-              </div>
-              <div className="sign-up-frame59">
-                <div className="sign-up-group4">
+                <div className="sign-up-sign-in-page-link">
+          
+            <div className="sign-up-group4">
                   <span className="sign-up-text05">
                     Have an account?
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: ' ',
-                      }}
-                    />
                   </span>
+                  <Link to="/sign-up-page1" className="sign-up-link-to-sign-in-page">
+              <span className="sign-up-text15"> Sign In</span>
+              <br className="sign-up-text16"></br>
+       
+            </Link>
                 </div>
+          </div>
               </div>
+             
 
             </form>
+            
           </div>
 
 
           <div className="sign-up-container2">
             <img src='/eaaf8151-89e3-401a-84bc-f53ab5ddd004-2000w.jpg' style={{ width: "100%", height: "100%" }}></img>
           </div>
-          <span className="sign-up-text06">
-            <span className="sign-up-text07">
-              Have an account?
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: ' ',
-                }}
-              />
-            </span>
-            <span>Sign In</span>
-          </span>
-          <span className="sign-up-text09">
-            <span className="sign-up-text10">
-              Have an account?
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: ' ',
-                }}
-              />
-            </span>
-            <span>Sign In</span>
-          </span>
-          <span className="sign-up-text12">
-            <span className="sign-up-text13">
-              Have an account?
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: ' ',
-                }}
-              />
-            </span>
-            <span>Sign In</span>
-          </span>
+      
+ 
 
 
-          <div className="sign-up-sign-in-page-link">
-            <Link to="/sign-up-page1" className="sign-up-link-to-sign-in-page">
-              <span className="sign-up-text15">Sign In</span>
-              <br className="sign-up-text16"></br>
-              <br></br>
-              <br></br>
-            </Link>
-          </div>
+          
         </div>
       </div>
       <footer className="footerContainer sign-up-footer">

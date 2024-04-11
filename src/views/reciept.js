@@ -51,14 +51,21 @@ const Reciept = (props) => {
                 {cookies.cart&& <div style={{width:10,height:10,borderRadius:5,marginLeft:10,background:"red"}}></div>}
               </Link>
             </nav>
-            <div className="reciept-buttons">
-              <Link to="/sign-up-page1" className="reciept-login buttonFlat">
+            {cookies.user === undefined && <div className="home-buttons">
+              <Link to="/sign-up-page1" className="home-login buttonFlat">
                 Login
               </Link>
-              <Link to="/sign-up" className="reciept-register buttonFilled">
+              <Link to="/sign-up" className="home-register buttonFilled">
                 Register
               </Link>
+            </div>}
+            {cookies.user !== undefined && <div className="home-buttons">
+              <button  className="home-login buttonFlat" value={"Logout"} onClick={()=>{
+                removeCookies('user')
+                props.history.push('/')
+              }}>Logout</button>
             </div>
+            }
           </div>
           <div data-thq="thq-burger-menu" className="reciept-burger-menu">
             <svg viewBox="0 0 1024 1024" className="reciept-icon socialIcons">
