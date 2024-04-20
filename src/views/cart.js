@@ -45,7 +45,7 @@ const Cart = (props) => {
               </Link>
             </div>}
             {cookies.user !== undefined && <div className="home-buttons">
-              <button  className="home-login buttonFlat" value={"Logout"} onClick={()=>{
+              <button className="home-login buttonFlat" value={"Logout"} onClick={() => {
                 removeCookies('user')
                 props.history.push('/')
               }}>Logout</button>
@@ -108,200 +108,182 @@ const Cart = (props) => {
           </div>
         </header>
       </div>
-      <div className="cart-hero"></div>
-      <div className="cart-faq">
-        <div className="cart-faq-container faqContainer"></div>
-      </div>
+
       <div className="cart-gallery-card">
-        <div className="cart-mac-book-pro141">
-          <div className="cart-payment-details">
-            <span className="cart-payment-title">
-              Let’s Make        Payment
-            </span>
-            <span className="cart-payment-subtitle-1">
-              <span>Cardholder's Info</span>
-            </span>
-            <span className="cart-payment-subtitle-2">
-              <span>Card Number</span>
-            </span>
 
-            <span className="cart-payment-subtitle-3">
-              <span>Expiry</span>
-            </span>
-            <span className="cart-payment-subtitle-4">
-              <span>CVC</span>
-            </span>
-          </div>
-          <div className="cart-circle-designs">
-            <img
-              alt="Ellipse1329"
-              src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/4c578900-d574-4b66-b533-2538ceec9d31/3a24e950-75d9-422e-aff4-d808b07f0a8f?org_if_sml=13636&amp;force_format=original"
-              className="cart-ellipse1"
-            />
-            <img
-              alt="Ellipse2330"
-              src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/4c578900-d574-4b66-b533-2538ceec9d31/38114660-d05a-4395-987e-caedd3e0ad25?org_if_sml=14048&amp;force_format=original"
-              className="cart-ellipse2"
-            />
-          </div>
-          <span className="cart-stating-label">
-            <span>You’re paying,</span>
-          </span>
-          <span className="cart-room">
-            <span>{roomtype[cookies.cart]}</span>
-          </span>
-          <span className="cart-room-price">
-            <span>$ {roomprice}</span>
-          </span>
-          <span className="cart-total-price2">
-            <span>
-              $ {roomprice}
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: ' ',
-                }}
-              />
-            </span>
-            <span className="cart-text08">{
+        <form className="cart-form" method='GET' action='/reciept'>
+          <div className="cart-mac-book-pro141">
+            <div className="cart-payment-details">
+              <span className="cart-payment-title">
+                Let’s Make        Payment
+              </span>
 
-            }</span>
-          </span>
-          <span className="cart-tax-amount">
-            <span>$ {tax}</span>
-          </span>
-          <span className="cart-total-price1">
-            <span>$ {total}</span>
-          </span>
-          <span className="cart-totallabel">
-            <span>Total</span>
-          </span>
-          <span className="cart-tax-label">
-            <span>Tax</span>
-          </span>
-          <form className="cart-form" method='GET' action='/reciept'>
-            <div className="cart-expiry">
-              <input required
-                id='expiry_date'
-                type="date"
-                placeholder="placeholder"
-                className="cart-exp-date input"
-              />
-            </div>
-            <div className="cart-checkout-button">
-              <button className="cart-pay-button button" onClick={() => {
-                const form = document.querySelector('.cart-form')
-                form.addEventListener('submit', (e) => {
-                  e.preventDefault()
-                  const room_type = cookies.cart
-                  const card_number = document.getElementById('card_number').value
-                  const card_name = document.getElementById('card_name').value
-                  const expiry = document.getElementById('expiry_date').value
-                  const cvc = document.getElementById('cvc').value
-                  const email = document.getElementById('email').value
-                  if (card_number && card_name && expiry && cvc && email) {
-                    const checkout_data = {
-                      room_id:room_type,
-                      card_number:card_number,
-                      card_holder_name:card_name,
-                      expiration_date:expiry,
-                      cvc:cvc,
-                      email:email
-                    };
-                    fetch('http://localhost:5001/checkout', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify(checkout_data)
-                    }).then(res => res.json()).then(data => {
-                     console.log(data)
-                      if (data.message === 'Checkout successful') {
-                        removeCookies("cart", { path: "/" })
-                        window.location.href = '/reciept?ref_number=' + data.ref_number;
-                      }else{
-                        alert(data.message+' Please try again')
-                      }
-                    });
 
-                  } else {
-                    alert('Please fill all the fields')
-                  }
-                });
-              }}>
-                Pay
-              </button>
-            </div>
 
-            <div className="cart-card-number">
-              <input required
-                id='card_number'
-                type="number"
-                placeholder="placeholder"
-                className="cart-card-number1 input"
-              />
-            </div>
-            <div className="cart-card-holders-name">
-              <input required
-                id='card_name'
-                type="text"
-                placeholder="card holder's name"
-                className="cart-card-name input"
-              />
-              <input required
-                id='email'
-                type="email"
-                placeholder="email address"
-                className="cart-card-name input"
-              />
-            </div>
 
-            <div className="cart-clear-cart-button">
-              <button type="button" className="cart-clear-button button" onClick={() => removeCookies("cart", { path: "/" })}>
-                <span className="cart-text13">
-                  <span>Clear</span>
+              <div className="cart-card-holders-input">
+                <label for="card_number">Card Number</label>
+                <input required
+                  id='card_number'
+                  type="number"
+                  placeholder="placeholder"
+                  className="cart-card-number1 input"
+                />
+              </div>
+              <div className="cart-card-holders-input">
+                <label for="card_name">Card Holder's Name</label>
+                <input required
+                  id='card_name'
+                  type="text"
+                  placeholder="card holder's name"
+                  className="cart-card-name input"
+                />
+
+              </div>
+
+              <div className="cart-card-holders-input">
+                <label for="email">Email</label>
+                <input required
+                  id='email'
+                  type="email"
+                  placeholder="email address"
+                  className="cart-card-name input"
+                />
+              </div>
+
+
+              <div className="cart-card-holders-input">
+                <label for="cvc">CVC</label>
+                <input required
+                  id='cvc'
+                  type="number"
+                  placeholder="placeholder"
+                  className="cart-cvc1 input"
+                />
+
+              </div>
+              <div className="cart-card-holders-input">
+                <button className="cart-pay-button button" onClick={() => {
+                  const form = document.querySelector('.cart-form')
+                  form.addEventListener('submit', (e) => {
+                    e.preventDefault()
+                    const room_type = cookies.cart
+                    const card_number = document.getElementById('card_number').value
+                    const card_name = document.getElementById('card_name').value
+                    const expiry = document.getElementById('expiry_date').value
+                    const cvc = document.getElementById('cvc').value
+                    const email = document.getElementById('email').value
+                    if (card_number && card_name && expiry && cvc && email) {
+                      const checkout_data = {
+                        room_id: room_type,
+                        card_number: card_number,
+                        card_holder_name: card_name,
+                        expiration_date: expiry,
+                        cvc: cvc,
+                        email: email
+                      };
+                      fetch('http://localhost:5001/checkout', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(checkout_data)
+                      }).then(res => res.json()).then(data => {
+                        console.log(data)
+                        if (data.message === 'Checkout successful') {
+                          removeCookies("cart", { path: "/" })
+                          window.location.href = '/reciept?ref_number=' + data.ref_number;
+                        } else {
+                          alert(data.message + ' Please try again')
+                        }
+                      });
+
+                    } else {
+                      alert('Please fill all the fields')
+                    }
+                  });
+                }}>
+                  Pay
+                </button>
+              </div>
+
+
+              <div className="cart-card-holders-input">
+                <span>Do you have a reservation already?</span>
+                <Link to="/reciept" className="cart-link-to-receipt-page">
+                  <span>Reservation</span>
                   <br></br>
-                </span>
-              </button>
-            </div>
-
-            <img
-              alt="Vector1550"
-              src="/external/vector1550-yoz7.svg"
-              className="cart-vector1"
-            />
-            <div className="cart-cvc">
-              <input required
-                id='cvc'
-                type="number"
-                placeholder="placeholder"
-                className="cart-cvc1 input"
-              />
-
-            </div>
-            <div className="cart-container1">
-              <div className="cart-container2">
-                <div className="cart-container3"></div>
+                </Link>
               </div>
             </div>
-            <img
-              alt="image"
-              src="/external/94601b53-60d5-43cb-a8b6-bd38912f9a45-1500w.jpg"
-              className="cart-image"
-            />
-          </form>
-          <div className="cart-receipt-page-link">
-            <Link to="/reciept" className="cart-link-to-receipt-page">
-              <span>Reservation</span>
-              <br></br>
-            </Link>
+            <div className="cart-circle-designs">
+              <div className="cart-circle1">
+                <div className="cart-ellipse-guide">
+                  <img
+                    alt="Ellipse1329"
+                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/4c578900-d574-4b66-b533-2538ceec9d31/3a24e950-75d9-422e-aff4-d808b07f0a8f?org_if_sml=13636&amp;force_format=original"
+                    className="cart-ellipse1"
+                  />
+                  <img
+                    alt="Ellipse2330"
+                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/4c578900-d574-4b66-b533-2538ceec9d31/38114660-d05a-4395-987e-caedd3e0ad25?org_if_sml=14048&amp;force_format=original"
+                    className="cart-ellipse2"
+                  />     <div className="cart-room-price1">
+                  <div className='reservation-info'>
+                    <span className="cart-stating-label">You’re paying,</span>
+                  </div>
+                  <div className='reservation-info'>
+                    <span className="cart-total-price2">
+                      $ {roomprice}
+                      <span
+
+                      />
+                    </span>
+                  </div>
+                </div>
+           
+
+                </div>
+              </div>
+              <div className="cart-circle2">
+
+
+                <div className="cart-room">
+                  <span>{roomtype[cookies.cart]}</span>
+                </div>
+                <div className='reservation-info'>
+                  <span className="cart-tax-label">Tax&emsp; </span>
+
+                  <span className="cart-tax-amount">${tax}</span>
+                </div>
+                <div className='reservation-info'>
+                  <span className="cart-totallabel">Total &emsp;</span>
+
+                  <span className="cart-total-price1"> ${total}</span>
+                </div>
+
+                <div className="cart-clear-cart-button">
+                  <button type="button" className="cart-clear-button button" onClick={() => removeCookies("cart", { path: "/" })}>
+                    <span className="cart-text13">
+                      <span>Clear</span>
+                      <br></br>
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+
           </div>
-          <div className="cart-group1">
-            <span>
-              <span>Do you have a reservation already?</span>
-              <br></br>
-            </span>
-          </div>
-        </div>
+        </form>
+      </div>
+      <div class="cart-image-deco">
+        <img
+          alt="image"
+          src="/external/94601b53-60d5-43cb-a8b6-bd38912f9a45-1500w.jpg"
+          className="cart-image"
+        />
       </div>
       <footer className="footerContainer cart-footer">
         <div className="cart-container4">
