@@ -28,7 +28,7 @@ const Home = (props) => {
                 Rooms
               </Link>
               <Link to="/cart" className="home-cart-link bodySmall">
-                Cart {cookies.cart&& <div style={{width:10,height:10,borderRadius:5,marginLeft:10,background:"red"}}></div>}
+                Cart {cookies.cart && <div style={{ width: 10, height: 10, borderRadius: 5, marginLeft: 10, background: "red" }}></div>}
               </Link>
             </nav>
             {cookies.user === undefined && <div className="home-buttons">
@@ -40,26 +40,34 @@ const Home = (props) => {
               </Link>
             </div>}
             {cookies.user !== undefined && <div className="home-buttons">
-              <button  className="home-login buttonFlat" value={"Logout"} onClick={()=>{
+              <button className="home-login buttonFlat" value={"Logout"} onClick={() => {
                 removeCookies('user')
                 props.history.push('/')
               }}>Logout</button>
             </div>
             }
           </div>
-          <div data-thq="thq-burger-menu" className="home-burger-menu">
+          <div data-thq="thq-burger-menu" className="home-burger-menu" onClick={() => {
+            const mobileMenu = document.querySelector('.home-mobile-menu1')
+            mobileMenu.style.display = 'block'
+
+
+          }}>
             <svg viewBox="0 0 1024 1024" className="home-icon socialIcons">
               <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
             </svg>
           </div>
           <div
             data-thq="thq-mobile-menu"
-            className="home-mobile-menu1 mobileMenu"
+            className="home-mobile-menu1 mobileMenu teleport-show thq-show thq-translate-to-default"
           >
             <div className="home-nav">
               <div className="home-top">
                 <span className="logo">MOTELLY</span>
-                <div data-thq="thq-close-menu" className="home-close-menu">
+                <div data-thq="thq-close-menu" className="home-close-menu" onClick={() => {
+                  const mobileMenu = document.querySelector('.home-mobile-menu1')
+                  mobileMenu.style.display = 'none'
+                }}>
                   <svg
                     viewBox="0 0 1024 1024"
                     className="home-icon02 socialIcons"
@@ -69,16 +77,24 @@ const Home = (props) => {
                 </div>
               </div>
               <nav className="home-links1">
-                <span className="home-nav12 bodySmall">Home</span>
-                <span className="home-nav22 bodySmall">Rooms</span>
-                <span className="home-nav32 bodySmall">Login</span>
-                <span className="home-nav42 bodySmall">Sign Up</span>
-                <span className="home-nav52 bodySmall">Cart</span>
+              <Link to="/" className="home-room-link bodySmall">
+                  Home
+                </Link>
+                <Link to="/rooms" className="home-room-link bodySmall">
+                  Rooms
+                </Link>
+                <Link to="/cart" className="home-cart-link bodySmall">
+                  Cart {cookies.cart && <div style={{ width: 10, height: 10, borderRadius: 5, marginLeft: 10, background: "red" }}></div>}
+                </Link>
+                <Link to="/sign-up-page1" className="home-cart-link bodySmall">
+                  Login {cookies.user && <div style={{ width: 10, height: 10, borderRadius: 5, marginLeft: 10, background: "red" }}></div>}
+                </Link>
+                <Link to="/sign-up" className="home-cart-link bodySmall">
+                  Register {cookies.user && <div style={{ width: 10, height: 10, borderRadius: 5, marginLeft: 10, background: "red" }}></div>}
+                </Link>
+
               </nav>
-              <div className="home-buttons1">
-                <button className="buttonFlat">Login</button>
-                <button className="buttonFilled">Register</button>
-              </div>
+   
             </div>
             <div>
               <svg
