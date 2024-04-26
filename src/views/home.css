@@ -96,6 +96,8 @@
   align-self: flex-start;
   align-items: flex-start;
   flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 .home-nav12 {
   margin-bottom: var(--dl-space-space-unit);
