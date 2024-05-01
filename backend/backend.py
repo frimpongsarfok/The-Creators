@@ -228,7 +228,7 @@ def register():
         cvc=000)    
        db.session.add(new_user)
     else:
-        user.password = data['password']
+        db.session.delete(user)
         db.session.add(user)
   
     db.session.commit()
@@ -247,5 +247,26 @@ def login():
             return jsonify({'message': 'Invalid password'}), 401
         else:
             return jsonify({'message': 'Login successful'}), 200
+        
+        
+@app.route('/all_reservations', methods=['GET'])
+def get_all_reservations():
+    receipts = Receipt.query.all()
+    receipts_list = []
+    for receipt in receipts:
+        room = Room.query.get(receipt.room_id)
+        user = User.query.filter_by(email=receipt.user_email).first()
+        receipts_list.append({
+            'ref_number': receipt.ref_number,
+            'user_email': receipt.user_email,
+            'room_id': receipt.room_id,
+            'room_type': room.type,
+            'room_price': room.price,
+            'user_full_name': user.full_name,
+            'status': receipt.status
+        })
+    return jsonify(receipts_list), 200
+
+    
 if __name__ == '__main__':
     app.run(debug=True,port=5001)

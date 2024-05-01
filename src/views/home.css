@@ -219,6 +219,9 @@
   display: grid;
   grid-gap: var(--dl-space-space-oneandhalfunits);
   grid-template-columns: 1fr 1fr;
+  height: 700px;
+  overflow:scroll;
+  overflow-x:hidden
 }
 .home-banner {
   width: 100%;

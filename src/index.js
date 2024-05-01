@@ -15,11 +15,13 @@ import Reciept from './views/reciept'
 import Rooms from './views/rooms'
 import SignUp from './views/sign-up'
 import NotFound from './views/not-found'
+import Admin from './views/admin'
 
 const App = () => {
   return (
     <Router>
       <Switch>
+        <Route component={Admin} exact path="/admin" />
         <Route component={Home} exact path="/" />
         <Route component={Login} exact path="/sign-up-page1" />
         <Route component={Cart} exact path="/cart" />

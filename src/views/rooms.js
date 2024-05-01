@@ -216,11 +216,12 @@ const Rooms = (props) => {
               className="rooms-image"
             />
             <div className="rooms-container02">
+              
+              <h1 className="rooms-room-1-title">The Oceanfront Retreat</h1>
               <div className="rooms-container03">
-                <span className="rooms-room-1-price">----</span>
+               
 
               </div>
-              <h1 className="rooms-room-1-title">The Oceanfront Retreat</h1>
               <span className="rooms-room-1-description">
                 Offering unparalleled luxury, this stunning suite boasts
                 panoramic views of the sparkling ocean from its private balcony,
@@ -237,6 +238,7 @@ const Rooms = (props) => {
                   />
                   <span className="rooms-text14">Diamond Tier : {rooms.diamond}</span>
                 </div>
+                <span className="rooms-room-1-price">$450</span>
                 <button
                   type="button"
                   className="rooms-book-r1 button"
@@ -250,10 +252,10 @@ const Rooms = (props) => {
 
                   }
                 >
-
+                  
                   <span>
                     <span>Book</span>
-                    <br></br>
+                    
                   </span>
                 </button>
               </div>
@@ -269,10 +271,7 @@ const Rooms = (props) => {
               className="rooms-image2"
             />
             <div className="rooms-container05">
-              <div className="rooms-container06">
-                <span className="rooms-room-2-price">----</span>
-                <span className="rooms-room-2-availability">*</span>
-              </div>
+             
               <h1 className="rooms-room-2-title">The Beachside Breeze</h1>
               <span className="rooms-room-2-description">
                 Designed for comfort and style, this breezy room features a
@@ -289,6 +288,7 @@ const Rooms = (props) => {
                   />
                   <span className="rooms-text18">Gold Tier : {rooms.gold}</span>
                 </div>
+              <span className="rooms-room-1-price">$400</span>
                 <button type="button" className="button" onClick={async () => {
 
 
@@ -314,10 +314,7 @@ const Rooms = (props) => {
             className="rooms-image4"
           />
           <div className="rooms-container08">
-            <div className="rooms-container09">
-              <span className="rooms-room-3-price">----</span>
-              <span className="rooms-room-3-availability">*</span>
-            </div>
+           
             <h1 className="rooms-room-3-title">The Coastal Escape</h1>
             <span className="rooms-room-3-description">
               Embracing a relaxed vibe, this cozy room welcomes guests with a
@@ -325,6 +322,7 @@ const Rooms = (props) => {
               chairs for enjoying beachside snacks, a convenient mini-fridge for
               storing refreshments, and a tidy bathroom with a shower.
             </span>
+            
             <div className="rooms-container10">
               <div className="rooms-room-3-rank">
                 <img
@@ -334,6 +332,7 @@ const Rooms = (props) => {
                 />
                 <span className="rooms-text19">Silver Tier : {rooms.silver}</span>
               </div>
+              <span className="rooms-room-1-price">$350</span>
               <button type="button" className="button" onClick={async () => {
 
 
@@ -362,10 +361,7 @@ const Rooms = (props) => {
             className="rooms-image6"
           />
           <div className="rooms-container11">
-            <div className="rooms-container12">
-              <span className="rooms-room-4-price">----</span>
-              <span className="rooms-room-4-availability">*</span>
-            </div>
+       
             <h1 className="rooms-room-4-title">The Sand Dollar Haven</h1>
             <span className="rooms-room-4-description">
               Offering value without sacrificing comfort, this simple room
@@ -383,6 +379,7 @@ const Rooms = (props) => {
                 />
                 <span className="rooms-text23">Copper Tier : {rooms.copper}</span>
               </div>
+              <span className="rooms-room-1-price">$300</span>
               <button type="button" className="button" onClick={async () => {
                 if (rooms.copper > 0) {
                   setCookies('cart', 4, { path: '/' })

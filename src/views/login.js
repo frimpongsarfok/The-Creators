@@ -207,7 +207,11 @@ const Login = (props) => {
               <br className="sign-up-text16"></br>
        
             </Link>
-                </div>
+              </div>
+              <div className="sign-up-group4">
+                 <label for="loginType" className="sign-up-text05">Check as Admin : </label>
+                  <input type="checkbox" id="loginType" name="loginType" value="admin"></input>
+              </div>
           </div>
               </div>
              

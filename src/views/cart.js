@@ -166,6 +166,15 @@ const Cart = (props) => {
                   className="cart-card-name input"
                 />
               </div>
+              <div className="cart-card-holders-input">
+                <label for="expire_date">Expire Date</label>
+                <input required
+                  id='expiry_date'
+                  type="date"
+                  placeholder="Expire Date"
+                  className="cart-card-name input"
+                />
+              </div>
 
 
               <div className="cart-card-holders-input">
