@@ -14,7 +14,7 @@ const Admin = (props) => {
 
    React.useEffect( () => {
 
-        fetch('http://localhost:5001/all_reservations')
+        fetch('http://cmsc495-hotel-api-env.eba-i5qpecfq.us-east-2.elasticbeanstalk.com/all_reservations')
             .then(response => response.json())
             .then(data => {
                 setReservations(data)

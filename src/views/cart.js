@@ -207,7 +207,7 @@ const Cart = (props) => {
                         cvc: cvc,
                         email: email
                       };
-                      fetch('http://localhost:5001/checkout', {
+                      fetch('http://cmsc495-hotel-api-env.eba-i5qpecfq.us-east-2.elasticbeanstalk.com/checkout', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'

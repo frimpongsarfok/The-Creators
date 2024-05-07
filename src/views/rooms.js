@@ -14,7 +14,7 @@ const Rooms = (props) => {
   const [cookies, setCookies, removeCookies] = useCookies(['cart'])
   React.useEffect(() => {
     const fetchData = async () => {
-      const resp = await fetch('http://localhost:5001/available_rooms', {
+      const resp = await fetch('http://cmsc495-hotel-api-env.eba-i5qpecfq.us-east-2.elasticbeanstalk.com/available_rooms', {
         method: 'GET',
         // No need to set Content-Type for GET requests, and Access-Control-Allow-Origin is handled by the server.
       })
