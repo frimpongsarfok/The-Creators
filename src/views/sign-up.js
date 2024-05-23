@@ -184,7 +184,7 @@ const SignUp = (props) => {
                     alert('Password must be at least 8 characters')
                     return
                   } else {
-                    fetch('http://localhost:5001/register', {
+                    fetch('https://hotels.sbcodeproject.com/register', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json'

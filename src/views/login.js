@@ -170,7 +170,7 @@ const Login = (props) => {
                     alert('Password must be at least 8 characters')
                     return
                   } else {
-                    fetch('http://cmsc495-hotel-api-env.eba-i5qpecfq.us-east-2.elasticbeanstalk.com/login', {
+                    fetch('https://hotels.sbcodeproject.com/login', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json'

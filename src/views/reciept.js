@@ -11,7 +11,7 @@ const Reciept = (props) => {
   const ref_number = new URLSearchParams(document.location.search).get('ref_number')
   useEffect(() => {
     if (ref_number) {
-      fetch('http://cmsc495-hotel-api-env.eba-i5qpecfq.us-east-2.elasticbeanstalk.com/receipt?ref_number=' + ref_number, {
+      fetch('https://hotels.sbcodeproject.com/receipt?ref_number=' + ref_number, {
         method: 'GET',
       }).then((res) => {
         if (res.ok) {
